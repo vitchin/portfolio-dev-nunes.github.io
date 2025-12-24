@@ -6,7 +6,7 @@ const Hero = () => {
     <div className="container mx-auto px-4 pt-32 text-center">
       <div className="flex justify-center mb-8">
         <Image
-          src="/logo-placeholder.svg"
+          src="/DevNunes - logo.png"
           alt="Logo Placeholder"
           width={100}
           height={100}
@@ -16,7 +16,7 @@ const Hero = () => {
       <div className="flex flex-col md:flex-row items-center justify-center gap-8">
         <div className="w-64 h-64 relative">
           <Image
-            src="/profile-placeholder.svg"
+            src="/perfilFoto.png"
             alt="Profile Placeholder"
             width={250}
             height={250}
@@ -24,9 +24,9 @@ const Hero = () => {
           />
         </div>
         <div className="md:text-left">
-          <h1 className="text-4xl font-bold text-gray-800">Hello, I'm [Your Name]</h1>
+          <h1 className="text-4xl font-bold text-gray-800">VICTOR RICARDO OLIVEIRA NUNES</h1>
           <p className="mt-4 text-lg text-gray-600">
-            [Your professional summary here. Briefly introduce yourself and your expertise.]
+            Desenvolvedor Web Full Stack
           </p>
         </div>
       </div>

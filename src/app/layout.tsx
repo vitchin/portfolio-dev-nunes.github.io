@@ -1,5 +1,12 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import { Inter } from 'next/font/google';
+
+const inter = Inter({
+  subsets: ['latin'], // Specifies which character subsets to preload for better performance
+  display: 'swap', // Ensures text remains visible while the font is loading
+});
+
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -12,7 +19,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="scroll-smooth">
+    <html lang="en" className={`${inter.className} scroll-smooth`}>
       <head>
         <link
           rel="stylesheet"

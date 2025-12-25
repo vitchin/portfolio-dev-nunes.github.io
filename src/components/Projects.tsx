@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 
 const projects = [
@@ -44,7 +44,31 @@ const projects = [
 
 const Projects = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const projectsPerPage = 3;
+  const [projectsPerPage, setProjectsPerPage] = useState(3);
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth >= 1440) {
+        setProjectsPerPage(4);
+      } else if (window.innerWidth >= 1024) {
+        setProjectsPerPage(3);
+      } else if (window.innerWidth >= 768) {
+        setProjectsPerPage(2);
+      } else {
+        setProjectsPerPage(1);
+      }
+    };
+
+    handleResize();
+    window.addEventListener('resize', handleResize);
+
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  useEffect(() => {
+    setCurrentIndex(0);
+  }, [projectsPerPage]);
+
   const totalPages = Math.ceil(projects.length / projectsPerPage);
 
   const goToPrevious = () => {
@@ -67,7 +91,10 @@ const Projects = () => {
       <h2 className="text-3xl font-bold mb-4">Projetos</h2>
       <hr className="w-16 h-1 mx-auto my-6 bg-gray-300 border-0 rounded" />
       <div className="relative">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div
+          className="grid gap-8"
+          style={{ gridTemplateColumns: `repeat(${projectsPerPage}, 1fr)` }}
+        >
           {visibleProjects.map((project, index) => (
             <div key={index} className="bg-white rounded-lg shadow-md overflow-hidden">
               <Image

@@ -29,7 +29,7 @@ export default function Home() {
       </main>
 
       <footer className="text-center p-4 bg-[#0b1423]">
-        <p className="text-sm text-gray-300">© 2025 Your DevNunes. Todos os direitos reservados.</p>
+        <p className="text-sm text-gray-300">© 2025 DevNunes. Todos os direitos reservados.</p>
       </footer>
     </div>
   );

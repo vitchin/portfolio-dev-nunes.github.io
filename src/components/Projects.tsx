@@ -65,26 +65,32 @@ const Projects = () => {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
-  useEffect(() => {
-    setCurrentIndex(0);
-  }, [projectsPerPage]);
+    // Cálculos derivados (sem setState em effect)
+    const totalPages = Math.max(
+      1,
+      Math.ceil(projects.length / projectsPerPage)
+    );
 
-  const totalPages = Math.ceil(projects.length / projectsPerPage);
+    const safeCurrentIndex =
+      currentIndex >= totalPages ? 0 : currentIndex;
 
-  const goToPrevious = () => {
-    const isFirstPage = currentIndex === 0;
-    const newIndex = isFirstPage ? totalPages - 1 : currentIndex - 1;
-    setCurrentIndex(newIndex);
-  };
+    const startIndex = safeCurrentIndex * projectsPerPage;
+    const visibleProjects = projects.slice(
+      startIndex,
+      startIndex + projectsPerPage
+    );
 
-  const goToNext = () => {
-    const isLastPage = currentIndex === totalPages - 1;
-    const newIndex = isLastPage ? 0 : currentIndex + 1;
-    setCurrentIndex(newIndex);
-  };
+    const goToPrevious = () => {
+      setCurrentIndex(prev =>
+        prev === 0 ? totalPages - 1 : prev - 1
+      );
+    };
 
-  const startIndex = currentIndex * projectsPerPage;
-  const visibleProjects = projects.slice(startIndex, startIndex + projectsPerPage);
+    const goToNext = () => {
+      setCurrentIndex(prev =>
+        prev === totalPages - 1 ? 0 : prev + 1
+      );
+    };
 
   return (
     <div className="container h-[400px] mx-auto px-4 text-center">

@@ -81,16 +81,46 @@ const About = () => {
           style={{ transform: `translateX(${(0 - currentSlide) * 100}%)` }}
         >
           <p className="text-gray-600 mb-8">
-            Desenvolvedor web com experiência em aplicações em produção, atuando do backend ao frontend. Domínio em PHP, JavaScript, TypeScript, Laravel, Next.js e bancos de dados relacionais e NoSQL. Foco em código limpo, performance e soluções alinhadas ao cliente.
+            Desenvolvedor web com experiência na criação e manutenção de sistemas Web, do backend ao frontend. Trabalho com PHP e JavaScript, com foco em performance, segurança e manutenibilidade.
+            Especializado em Ciência de Dados consigo utilizar ferramentas como Python, Excel, Power BI, R, entre outros, para análise e mensuração de dados, estruturar informações, gerar métricas e apoiar decisões técnicas e de negócio.
           </p>
-          <h3 className="text-2xl font-bold mb-4">Linguagens</h3>
-          <p className="text-gray-600  mb-8">
-            PHP | JavaScript | TypeScript | Python | SQL
-          </p>
-          <h3 className="text-2xl font-bold mb-4">Frameworks</h3>
-          <p className="text-gray-600 mb-8">
-            Laravel | Next.js | MySQL | MongoDB | PostgreSQL | Firebase | Supabase | Docker | Git
-          </p>
+          <div className="space-y-0 mb-8"> 
+            <details className="group border border-gray-300 rounded-t-lg overflow-hidden">
+              <summary className="flex items-center justify-between p-4 bg-gray-50 hover:bg-gray-100 cursor-pointer transition-colors duration-200">
+                <span className="font-semibold text-gray-700">Desenvolvimento Web</span>
+                <svg className="w-5 h-5 text-gray-600 group-open:rotate-180 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+                </svg>
+              </summary>
+              <p className="text-gray-600 p-4 bg-white border-t border-gray-300">
+                PHP · JavaScript · MySQL · Laravel · Next.js · Flask · MongoDB · PostgreSQL · Firebase · Supabase
+              </p>
+            </details>
+            <details className="group border border-gray-300 rounded-b-lg overflow-hidden">
+              <summary className="flex items-center justify-between p-4 bg-gray-50 hover:bg-gray-100 cursor-pointer transition-colors duration-200">
+                <span className="font-semibold text-gray-700">Análise de Dados</span>
+                <svg className="w-5 h-5 text-gray-600 group-open:rotate-180 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+                </svg>
+              </summary>
+              <p className="text-gray-600 p-4 bg-white border-t border-gray-300">
+                Python · SQL · Excel · Power BI · R · Machine Learning · Estatística · Visualização de Dados
+              </p>
+            </details>
+          </div>
+          <div className="space-y-0 mb-8">
+            <details className="group border border-gray-300 rounded-lg overflow-hidden">
+              <summary className="flex items-center justify-between p-4 bg-gray-50 hover:bg-gray-100 cursor-pointer transition-colors duration-200">
+                <span className="font-semibold text-gray-700">Idiomas</span>
+                <svg className="w-5 h-5 text-gray-600 group-open:rotate-180 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M 19 14l-7 7m0 0l-7-7m7 7V3" />
+                </svg>
+              </summary>
+              <p className="text-gray-600 p-4 bg-white border-t border-gray-300">
+                Inglês Intermediário( C1 ): Leitura, Escrita e Conversação
+              </p>
+            </details>
+          </div>
         </div>
 
         {/* Professional Info View */}
@@ -155,13 +185,13 @@ const About = () => {
             <div className="space-y-0 mb-8">
               <details className="group border border-gray-300 rounded-t-lg overflow-hidden">
                 <summary className="flex items-center justify-between p-4 bg-gray-50 hover:bg-gray-100 cursor-pointer transition-colors duration-200 gap-4">
-                  <span className="font-semibold text-gray-700 break-words text-left">Recife Tecnologia – MikrotikSDWAN</span>
+                  <span className="font-semibold text-gray-700 break-words text-left">Desenvolvedor Web</span>
                   <svg className="w-5 h-5 text-gray-600 group-open:rotate-180 transition-transform duration-300 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
                   </svg>
                 </summary>
                 <p className="text-gray-600 p-4 bg-white border-t border-gray-300 text-left">
-                  Desenvolvedor Web (janeiro/2024 - dezembro/2025)
+                  Recife Tecnologia — MikrotikSDWAN (janeiro/2024 - dezembro/2025)
                   <br /><br />
                   Minhas atividades consistiam em: 
                   <br /><br />

@@ -26,6 +26,26 @@ const About = () => {
     return () => window.removeEventListener('resize', setContainerHeight);
   }, [currentSlide]);
 
+  const handleToggle = () => {
+    if (hasReachedEnd) {
+      // Go backwards
+      if (currentSlide > 0) {
+        setCurrentSlide(currentSlide - 1);
+        if (currentSlide - 1 === 0) {
+          setHasReachedEnd(false);
+        }
+      }
+    } else {
+      // Go forwards
+      if (currentSlide < 2) {
+        setCurrentSlide(currentSlide + 1);
+        if (currentSlide + 1 === 2) {
+          setHasReachedEnd(true);
+        }
+      }
+    }
+  };
+
   return (
     <div className="container mx-auto px-4 text-center">
       <h2 className="text-3xl font-bold mb-4">Sobre mim</h2>
@@ -48,13 +68,13 @@ const About = () => {
           <p className="text-gray-600 mb-8">
             Desenvolvedor web com experiência em aplicações em produção, atuando do backend ao frontend. Domínio em PHP, JavaScript, TypeScript, Laravel, Next.js e bancos de dados relacionais e NoSQL. Foco em código limpo, performance e soluções alinhadas ao cliente.
           </p>
-          <h3 className="text-2xl font-bold mb-4">Formação</h3>
-          <p className="text-gray-600 mb-8">
-            Técnico em Desenvolvimento de Sistemas, graduado em Análise e Desenvolvimento de Sistemas e pós-graduado em Ciência de Dados e Big Data Analytics.
+          <h3 className="text-2xl font-bold mb-4">Linguagens</h3>
+          <p className="text-gray-600  mb-8">
+            PHP | JavaScript | TypeScript | Python | SQL
           </p>
-          <h3 className="text-2xl font-bold mb-4">Minha Stack</h3>
-          <p className="text-gray-600">
-            PHP | JavaScript | TypeScript | Laravel | Next.js | MySQL | MongoDB | PostgreSQL | Firebase | Supabase | RESTful APIs
+          <h3 className="text-2xl font-bold mb-4">Frameworks</h3>
+          <p className="text-gray-600 mb-8">
+            Laravel | Next.js | MySQL | MongoDB | PostgreSQL | Firebase | Supabase | Docker | Git
           </p>
         </div>
 
@@ -66,19 +86,26 @@ const About = () => {
           }`}
           style={{ transform: `translateX(${(1 - currentSlide) * 100}%)` }}
         >
-          <h3 className="text-2xl font-bold mb-4">Linguagens de Programação</h3>
-          <p className="text-gray-600 mb-8">
-            PHP | JavaScript | TypeScript
-          </p>
-
-          <h3 className="text-2xl font-bold mb-4">Stack e Ferramentas</h3>
-          <p className="text-gray-600 mb-8">
-            Laravel | Next.js | React | Node.js | MySQL | MongoDB | PostgreSQL | Firebase | Supabase | Docker | Git
-          </p>
+          <h3 className="text-2xl font-bold mb-4">Formação</h3>
+              <p className="text-gray-600 mb-8">
+                Pós-graduação em Ciência de Dados e Big Data Analytics (Estácio, em andamento - previsão dezembro/2025). 
+                <br />
+                Graduação em Análise e Desenvolvimento de Sistemas (Estácio, julho/2024). 
+                <br />
+                Técnico em Desenvolvimento de Sistemas (ETE Adv. José David Gil Rodrigues, julho/2023).
+              </p>            
 
           <h3 className="text-2xl font-bold mb-4">Experiência Profissional</h3>
           <p className="text-gray-600">
-            Mais de 5 anos de experiência no desenvolvimento de aplicações web robustas, escaláveis e de alta performance, atuando em projetos para diversos setores e portes de empresa.
+            Recife Tecnologia – Desenvolvedor Web Suporte / Atual – desde Janeiro de 2024
+            Desenvolvimento e manutenção de plataforma web com PHP e JavaScript.
+            Uso do Laravel para rotas, controllers e banco de dados.
+            Integração de APIs RESTful e uso de Git para versionamento.
+            Correção de bugs, suporte técnico e atualização de versões em produção..
+            Reuniões para ajustes e uso do Trello para gerenciamento de tarefas.
+            Implementação do design conforme padrões de usabilidade.
+
+            Tecnologias: PHP, Laravel, Javascript, Git, API’s RESTful
           </p>
         </div>
 
@@ -95,29 +122,9 @@ const About = () => {
             Aqui você pode adicionar mais informações sobre seus hobbies, interesses ou qualquer outra coisa que queira compartilhar.
           </p>
         </div>
-      </div>
+  </div>
 
-  const handleToggle = () => {
-    if (hasReachedEnd) {
-      // Go backwards
-      if (currentSlide > 0) {
-        setCurrentSlide(currentSlide - 1);
-        if (currentSlide - 1 === 0) {
-          setHasReachedEnd(false);
-        }
-      }
-    } else {
-      // Go forwards
-      if (currentSlide < 2) {
-        setCurrentSlide(currentSlide + 1);
-        if (currentSlide + 1 === 2) {
-          setHasReachedEnd(true);
-        }
-      }
-    }
-  };
-
-      {/* Toggle Button */}
+  {/* Toggle Button */}
       <button
         onClick={handleToggle}
         className="mt-8 text-gray-600 hover:text-gray-900 transition-colors duration-300 focus:outline-none"

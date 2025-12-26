@@ -13,6 +13,7 @@ const About = () => {
 
   useEffect(() => {
     const slideRefs = [personalInfoRef, professionalInfoRef, additionalInfoRef];
+    
     const setContainerHeight = () => {
       if (containerRef.current && slideRefs[currentSlide]?.current) {
         const newHeight = slideRefs[currentSlide].current.scrollHeight;
@@ -21,9 +22,23 @@ const About = () => {
     };
 
     setContainerHeight();
+    
     // Re-calculate on window resize for better responsiveness
     window.addEventListener('resize', setContainerHeight);
-    return () => window.removeEventListener('resize', setContainerHeight);
+    
+    // Use ResizeObserver to monitor changes in the current slide element
+    const resizeObserver = new ResizeObserver(() => {
+      setContainerHeight();
+    });
+    
+    if (slideRefs[currentSlide]?.current) {
+      resizeObserver.observe(slideRefs[currentSlide].current!);
+    }
+    
+    return () => {
+      window.removeEventListener('resize', setContainerHeight);
+      resizeObserver.disconnect();
+    };
   }, [currentSlide]);
 
   const handleToggle = () => {
@@ -54,13 +69,13 @@ const About = () => {
       {/* Animated content container */}
       <div
         ref={containerRef}
-        className="relative max-w-3xl mx-auto overflow-hidden transition-all duration-500 ease-in-out"
+        className="relative max-w-3xl h-fit mx-auto overflow-hidden transition-all duration-500 ease-in-out"
         style={{ height: 'auto' }} // Initial height
       >
         {/* Personal Info View */}
         <div
           ref={personalInfoRef}
-          className={`absolute top-0 left-0 w-full transition-all duration-500 ease-in-out ${
+          className={`absolute top-0 left-0 w-full h-fit transition-all duration-500 ease-in-out ${
             currentSlide === 0 ? 'opacity-100' : 'opacity-0'
           }`}
           style={{ transform: `translateX(${(0 - currentSlide) * 100}%)` }}
@@ -81,46 +96,86 @@ const About = () => {
         {/* Professional Info View */}
         <div
           ref={professionalInfoRef}
-          className={`absolute top-0 left-0 w-full transition-all duration-500 ease-in-out ${
+          className={`absolute top-0 left-0 w-full h-fit transition-all duration-500 ease-in-out ${
             currentSlide === 1 ? 'opacity-100' : 'opacity-0'
           }`}
           style={{ transform: `translateX(${(1 - currentSlide) * 100}%)` }}
         >
           <h3 className="text-2xl font-bold mb-4">Formação</h3>
-              <p className="text-gray-600 mb-8">
-                Pós-graduação em Ciência de Dados e Big Data Analytics (Estácio, em andamento - previsão dezembro/2025). 
-                <br />
-                Graduação em Análise e Desenvolvimento de Sistemas (Estácio, julho/2024). 
-                <br />
-                Técnico em Desenvolvimento de Sistemas (ETE Adv. José David Gil Rodrigues, julho/2023).
-              </p>            
+              <div className="space-y-0 mb-8">
+                <details className="group border border-gray-300 rounded-t-lg overflow-hidden">
+                  <summary className="flex items-center justify-between p-4 bg-gray-50 hover:bg-gray-100 cursor-pointer transition-colors duration-200">
+                    <span className="font-semibold text-gray-700">Pós-graduação</span>
+                    <svg className="w-5 h-5 text-gray-600 group-open:rotate-180 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+                    </svg>
+                  </summary>
+                  <p className="text-gray-600 p-4 bg-white border-t border-gray-300">
+                    Ciência de Dados e Big Data Analytics (Estácio, dezembro/2025)
+                  </p>
+                </details>
 
-          <h3 className="text-2xl font-bold mb-4">Experiência Profissional</h3>
-          <p className="text-gray-600">
-            Recife Tecnologia – Desenvolvedor Web Suporte / Atual – desde Janeiro de 2024
-            Desenvolvimento e manutenção de plataforma web com PHP e JavaScript.
-            Uso do Laravel para rotas, controllers e banco de dados.
-            Integração de APIs RESTful e uso de Git para versionamento.
-            Correção de bugs, suporte técnico e atualização de versões em produção..
-            Reuniões para ajustes e uso do Trello para gerenciamento de tarefas.
-            Implementação do design conforme padrões de usabilidade.
+                <details className="group border border-gray-300 overflow-hidden">
+                  <summary className="flex items-center justify-between p-4 bg-gray-50 hover:bg-gray-100 cursor-pointer transition-colors duration-200">
+                    <span className="font-semibold text-gray-700">Graduação</span>
+                    <svg className="w-5 h-5 text-gray-600 group-open:rotate-180 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+                    </svg>
+                  </summary>
+                  <p className="text-gray-600 p-4 bg-white border-t border-gray-300">
+                    Análise e Desenvolvimento de Sistemas (Estácio, julho/2024)
+                  </p>
+                </details>
 
-            Tecnologias: PHP, Laravel, Javascript, Git, API’s RESTful
-          </p>
+                <details className="group border border-gray-300 rounded-b-lg overflow-hidden">
+                  <summary className="flex items-center justify-between p-4 bg-gray-50 hover:bg-gray-100 cursor-pointer transition-colors duration-200">
+                    <span className="font-semibold text-gray-700">Técnico</span>
+                    <svg className="w-5 h-5 text-gray-600 group-open:rotate-180 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+                    </svg>
+                  </summary>
+                  <p className="text-gray-600 p-4 bg-white border-t border-gray-300">
+                    Desenvolvimento de Sistemas (ETE Adv. José David Gil Rodrigues, julho/2023)
+                  </p>
+                </details>
+              </div>
+
         </div>
+
 
         {/* Additional Info View */}
         <div
           ref={additionalInfoRef}
-          className={`absolute top-0 left-0 w-full transition-all duration-500 ease-in-out ${
+          className={`absolute top-0 left-0 w-full h-fit transition-all duration-500 ease-in-out ${
             currentSlide === 2 ? 'opacity-100' : 'opacity-0'
           }`}
           style={{ transform: `translateX(${(2 - currentSlide) * 100}%)` }}
         >
-          <h3 className="text-2xl font-bold mb-4">Informações Adicionais</h3>
-          <p className="text-gray-600">
-            Aqui você pode adicionar mais informações sobre seus hobbies, interesses ou qualquer outra coisa que queira compartilhar.
-          </p>
+          <h3 className="text-2xl font-bold mb-4">Experiência Profissional</h3>
+            <div className="space-y-0 mb-8">
+              <details className="group border border-gray-300 rounded-t-lg overflow-hidden">
+                <summary className="flex items-center justify-between p-4 bg-gray-50 hover:bg-gray-100 cursor-pointer transition-colors duration-200 gap-4">
+                  <span className="font-semibold text-gray-700 break-words text-left">Recife Tecnologia – MikrotikSDWAN</span>
+                  <svg className="w-5 h-5 text-gray-600 group-open:rotate-180 transition-transform duration-300 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+                  </svg>
+                </summary>
+                <p className="text-gray-600 p-4 bg-white border-t border-gray-300 text-left">
+                  Desenvolvedor Web (janeiro/2024 - dezembro/2025)
+                  <br /><br />
+                  Minhas atividades consistiam em: 
+                  <br /><br />
+                  Desenvolvimento e manutenção de plataforma web com PHP e JavaScript;
+                  Uso do Laravel para rotas, controllers e banco de dados;
+                  Integração de APIs RESTful e uso de Git para versionamento;
+                  Correção de bugs, suporte técnico e atualização de versões em produção;
+                  Reuniões para ajustes e uso do Trello para gerenciamento de tarefas;
+                  Implementação do design conforme padrões de usabilidade;
+                  <br /><br />
+                  Principais tecnologias: PHP, Laravel, Javascript, Git, API's RESTful
+                </p>
+              </details>
+            </div>
         </div>
   </div>
 

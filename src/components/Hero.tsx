@@ -2,7 +2,6 @@
 
 import React from 'react';
 import Image from 'next/image';
-import { Typewriter } from 'react-simple-typewriter';
 
 const Hero = () => {
   return (
@@ -36,19 +35,11 @@ const Hero = () => {
         {/* Text Content */}
         <div className="max-w-xl flex flex-col items-center md:items-start justify-center">
           <h1 className="mb-2 mt-5 md:mt-0 text-3xl md:text-4xl font-black text-[#acbfff] tracking-widest">
-            <Typewriter
-              words={['VICTOR RICARDO']}
-              loop={1}
-              cursor
-              cursorStyle="|"
-              typeSpeed={120}
-            />
+            VICTOR RICARDO
           </h1>
-          <h2 className="mb-5 text-2xl font-semibold">Desenvolvedor Web & Cientista de Dados</h2>
+          <h2 className="mb-5 text-2xl font-semibold">Desenvolvedor Web focado em performance e código limpo.</h2>
           <p className="text-lg text-gray-400 mb-4">
-            Desenvolvedor Web com experiência, atuando do princípio ao fim na criação de sistemas Web. Trabalho com foco na entrega de soluções que possam suprir as necessidades dos clientes e usuários.
-            <br /><br />
-            PHP · JavaScript · Laravel · Next.js · Python · Excel · Power BI
+            Laravel · Next.js · PHP · JavaScript · Python
           </p>
           <a href="#parameuzap" className="w-full md:w-auto flex justify-center md:justify-start">
             <button className="flex flex-row items-center justify-center gap-2 mt-2 px-8 py-3 font-bold rounded-full bg-[#e71919] text-white transition duration-300 animate-pulse cursor-pointer hover:bg-[#dd0808] shadow-lg hover:shadow-xl">

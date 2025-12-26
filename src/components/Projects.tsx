@@ -1,127 +1,59 @@
 "use client";
 
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import Image from 'next/image';
 
 const projects = [
   {
-    type: 'Programming',
     title: 'PyClass',
-    description: 'A brief description of the programming project.',
-    Languages: 'Some languages used in the project.',
+    description: 'Plataforma interativa para ensino de Python, com lições, exercícios e feedback em tempo real para um aprendizado dinâmico.',
+    technologies: 'Flask · JavaScript · SQLAlchemy',
     image: './project-placeholder.svg',
   },
   {
-    type: 'Programming',
     title: 'IEBIMembresia',
-    description: 'Sistema CRUD de controle de membros/congregados de uma igreja local.',
-    Languages: 'Next.js · Typescript · Firebase · TailwindCSS',
+    description: 'Solução full-stack para gestão de membros de igreja, otimizando o controle de dados e a comunicação interna.',
+    technologies: 'Next.js · Typescript · Firebase · TailwindCSS',
     image: './Iebimembresia.png',
   },
   {
-    type: 'Programming',
     title: 'AskServiços',
-    description: 'Another programming project.',
-    Languages: 'Some languages used in the project.',
+    description: 'Marketplace que conecta clientes a profissionais locais, com perfis, avaliações e agendamento de serviços.',
+    technologies: 'PHP · Laravel · MySQL',
     image: './project-placeholder.svg',
   },
   {
-    type: 'Programming',
     title: 'FGH QRCode',
-    description: 'Sistema de geração de QRCode feito para equipe de manutenção predial do Hospital Miguel Arraes.',
-    Languages: 'HTML · CSS · JavaScript · TailwindCSS',
+    description: 'Ferramenta que agiliza o acesso a manuais e ordens de serviço para equipes de manutenção através de QR Codes.',
+    technologies: 'HTML · CSS · JavaScript · TailwindCSS',
     image: './fghqrcode.png',
   },
 ];
 
 const Projects = () => {
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [projectsPerPage, setProjectsPerPage] = useState(3);
-
-  useEffect(() => {
-    const handleResize = () => {
-      if (window.innerWidth >= 1440) {
-        setProjectsPerPage(4);
-      } else if (window.innerWidth >= 1024) {
-        setProjectsPerPage(3);
-      } else if (window.innerWidth >= 768) {
-        setProjectsPerPage(2);
-      } else {
-        setProjectsPerPage(1);
-      }
-    };
-
-    handleResize();
-    window.addEventListener('resize', handleResize);
-
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
-
-    // Cálculos derivados (sem setState em effect)
-    const totalPages = Math.max(
-      1,
-      Math.ceil(projects.length / projectsPerPage)
-    );
-
-    const safeCurrentIndex =
-      currentIndex >= totalPages ? 0 : currentIndex;
-
-    const startIndex = safeCurrentIndex * projectsPerPage;
-    const visibleProjects = projects.slice(
-      startIndex,
-      startIndex + projectsPerPage
-    );
-
-    const goToPrevious = () => {
-      setCurrentIndex(prev =>
-        prev === 0 ? totalPages - 1 : prev - 1
-      );
-    };
-
-    const goToNext = () => {
-      setCurrentIndex(prev =>
-        prev === totalPages - 1 ? 0 : prev + 1
-      );
-    };
-
   return (
-    <div className="container h-fit mx-auto px-4 text-center">
+    <div className="container mx-auto px-4 text-center">
       <h2 className="text-3xl font-bold mb-4">Projetos</h2>
       <hr className="w-16 h-1 mx-auto my-6 bg-gray-300 border-0 rounded" />
-      <div className="relative">
-        <div
-          className="grid gap-8"
-          style={{ gridTemplateColumns: `repeat(${projectsPerPage}, 1fr)` }}
-        >
-          {visibleProjects.map((project, index) => (
-            <div key={index} className="bg-white rounded-lg shadow-md overflow-hidden">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+        {projects.map((project, index) => (
+          <div key={index} className="bg-white rounded-lg shadow-md overflow-hidden flex flex-col">
+            <div className="w-full h-48 relative">
               <Image
                 src={project.image}
                 alt={project.title}
-                width={350}
-                height={250}
-                className="w-full h-48 object-cover flex justify-center items-center"
+                fill
+                className="object-cover"
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
               />
-              <div className="p-6">
-                <h5 className="text-xl font-bold mb-2">{project.title}</h5>
-                <p className="text-gray-700">{project.description}</p>
-                <p className="text-sm text-gray-700 pt-2">{project.Languages}</p>
-              </div>
             </div>
-          ))}
-        </div>
-        <button
-          onClick={goToPrevious}
-          className="absolute top-1/2 left-0 w-[40px] h-[40px] transform -translate-y-1/2 bg-gray-800 text-white p-2 rounded-full"
-        >
-          &#10094;
-        </button>
-        <button
-          onClick={goToNext}
-          className="absolute top-1/2 right-0 w-[40px] h-[40px]transform -translate-y-1/2 bg-gray-800 text-white p-2 rounded-full"
-        >
-          &#10095;
-        </button>
+            <div className="p-6 flex flex-col flex-grow">
+              <h5 className="text-xl font-bold mb-2">{project.title}</h5>
+              <p className="text-gray-700 flex-grow">{project.description}</p>
+              <p className="text-sm text-gray-600 pt-4 font-medium">{project.technologies}</p>
+            </div>
+          </div>
+        ))}
       </div>
     </div>
   );

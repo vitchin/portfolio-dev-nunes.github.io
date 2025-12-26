@@ -2,6 +2,7 @@ import React from 'react';
 import Navbar from '../components/Navbar';
 import Hero from '../components/Hero';
 import About from '../components/About';
+import Stack from '../components/Stack';
 import Projects from '../components/Projects';
 import Contact from '../components/Contact';
 
@@ -15,15 +16,19 @@ export default function Home() {
       </header>
 
       <main className="flex-grow">
-        <section id="about" className="py-20 shadow-2xl">
+        <section id="about">
           <About />
         </section>
 
-        <section id="projects" className="py-20 bg-gray-100 shadow-lg">
+        <section id="stack" className="bg-white">
+          <Stack />
+        </section>
+
+        <section id="projects" className="bg-gray-100">
           <Projects />
         </section>
 
-        <section id="contact" className="py-20 bg-[#0b1423]">
+        <section id="contact" className="bg-[#0b1423]">
           <Contact />
         </section>
       </main>

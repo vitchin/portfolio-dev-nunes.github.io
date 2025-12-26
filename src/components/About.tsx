@@ -4,17 +4,18 @@ import React, { useState, useRef, useEffect } from 'react';
 import Image from 'next/image';
 
 const About = () => {
-  const [showProfessionalInfo, setShowProfessionalInfo] = useState(false);
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const [hasReachedEnd, setHasReachedEnd] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
   const personalInfoRef = useRef<HTMLDivElement>(null);
   const professionalInfoRef = useRef<HTMLDivElement>(null);
+  const additionalInfoRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    const slideRefs = [personalInfoRef, professionalInfoRef, additionalInfoRef];
     const setContainerHeight = () => {
-      if (containerRef.current && personalInfoRef.current && professionalInfoRef.current) {
-        const newHeight = showProfessionalInfo
-          ? professionalInfoRef.current.scrollHeight
-          : personalInfoRef.current.scrollHeight;
+      if (containerRef.current && slideRefs[currentSlide]?.current) {
+        const newHeight = slideRefs[currentSlide].current.scrollHeight;
         containerRef.current.style.height = `${newHeight}px`;
       }
     };
@@ -23,7 +24,7 @@ const About = () => {
     // Re-calculate on window resize for better responsiveness
     window.addEventListener('resize', setContainerHeight);
     return () => window.removeEventListener('resize', setContainerHeight);
-  }, [showProfessionalInfo]);
+  }, [currentSlide]);
 
   return (
     <div className="container mx-auto px-4 text-center">
@@ -40,8 +41,9 @@ const About = () => {
         <div
           ref={personalInfoRef}
           className={`absolute top-0 left-0 w-full transition-all duration-500 ease-in-out ${
-            showProfessionalInfo ? '-translate-x-full opacity-0' : 'translate-x-0 opacity-100'
+            currentSlide === 0 ? 'opacity-100' : 'opacity-0'
           }`}
+          style={{ transform: `translateX(${(0 - currentSlide) * 100}%)` }}
         >
           <p className="text-gray-600 mb-8">
             Desenvolvedor web com experiência em aplicações em produção, atuando do backend ao frontend. Domínio em PHP, JavaScript, TypeScript, Laravel, Next.js e bancos de dados relacionais e NoSQL. Foco em código limpo, performance e soluções alinhadas ao cliente.
@@ -60,8 +62,9 @@ const About = () => {
         <div
           ref={professionalInfoRef}
           className={`absolute top-0 left-0 w-full transition-all duration-500 ease-in-out ${
-            showProfessionalInfo ? 'translate-x-0 opacity-100' : 'translate-x-full opacity-0'
+            currentSlide === 1 ? 'opacity-100' : 'opacity-0'
           }`}
+          style={{ transform: `translateX(${(1 - currentSlide) * 100}%)` }}
         >
           <h3 className="text-2xl font-bold mb-4">Linguagens de Programação</h3>
           <p className="text-gray-600 mb-8">
@@ -78,11 +81,45 @@ const About = () => {
             Mais de 5 anos de experiência no desenvolvimento de aplicações web robustas, escaláveis e de alta performance, atuando em projetos para diversos setores e portes de empresa.
           </p>
         </div>
+
+        {/* Additional Info View */}
+        <div
+          ref={additionalInfoRef}
+          className={`absolute top-0 left-0 w-full transition-all duration-500 ease-in-out ${
+            currentSlide === 2 ? 'opacity-100' : 'opacity-0'
+          }`}
+          style={{ transform: `translateX(${(2 - currentSlide) * 100}%)` }}
+        >
+          <h3 className="text-2xl font-bold mb-4">Informações Adicionais</h3>
+          <p className="text-gray-600">
+            Aqui você pode adicionar mais informações sobre seus hobbies, interesses ou qualquer outra coisa que queira compartilhar.
+          </p>
+        </div>
       </div>
+
+  const handleToggle = () => {
+    if (hasReachedEnd) {
+      // Go backwards
+      if (currentSlide > 0) {
+        setCurrentSlide(currentSlide - 1);
+        if (currentSlide - 1 === 0) {
+          setHasReachedEnd(false);
+        }
+      }
+    } else {
+      // Go forwards
+      if (currentSlide < 2) {
+        setCurrentSlide(currentSlide + 1);
+        if (currentSlide + 1 === 2) {
+          setHasReachedEnd(true);
+        }
+      }
+    }
+  };
 
       {/* Toggle Button */}
       <button
-        onClick={() => setShowProfessionalInfo(!showProfessionalInfo)}
+        onClick={handleToggle}
         className="mt-8 text-gray-600 hover:text-gray-900 transition-colors duration-300 focus:outline-none"
         aria-label="Alternar visualização de informações"
       >
@@ -97,7 +134,7 @@ const About = () => {
             strokeLinecap="round"
             strokeLinejoin="round"
             strokeWidth={2}
-            d={showProfessionalInfo ? "M10 19l-7-7m0 0l7-7m-7 7h18" : "M14 5l7 7m0 0l-7 7m7-7H3"}
+            d={hasReachedEnd ? "M10 19l-7-7m0 0l7-7m-7 7h18" : "M14 5l7 7m0 0l-7 7m7-7H3"}
           />
         </svg>
       </button>

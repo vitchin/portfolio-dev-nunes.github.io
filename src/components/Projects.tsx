@@ -18,12 +18,6 @@ const projects = [
   },
   {
     type: 'Programming',
-    title: 'Mikrotik-SDWAN',
-    description: 'Another programming project.',
-    image: './project-placeholder.svg',
-  },
-  {
-    type: 'Programming',
     title: 'AskServiços',
     description: 'Another programming project.',
     image: './project-placeholder.svg',
@@ -31,12 +25,6 @@ const projects = [
   {
     type: 'Programming',
     title: 'Gerador QRCode (FGH)',
-    description: 'Another programming project.',
-    image: './project-placeholder.svg',
-  },
-  {
-    type: 'Programming',
-    title: 'OdontoRAIZ',
     description: 'Another programming project.',
     image: './project-placeholder.svg',
   },

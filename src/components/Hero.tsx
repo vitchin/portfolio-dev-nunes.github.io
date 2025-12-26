@@ -44,12 +44,12 @@ const Hero = () => {
               typeSpeed={120}
             />
           </h1>
-          <h2 className="mb-5 text-2xl font-semibold">Web Developer & Cientista de Dados</h2>
+          <h2 className="mb-5 text-2xl font-semibold">Desenvolvedor Web & Cientista de Dados</h2>
           <p className="text-lg text-gray-400 mb-4">
-            Profissional dedicado e apaixonado por tecnologia, com mais de 1 ano de experiência como Web Developer. Tenho foco em entregas eficientes utilizando Laravel, PHP e JavaScript, além de construir interfaces de usuário modernas e funcionais.
+            Desenvolvedor Web com mais de 1 ano de experiência em desenvolvimento, manutenção e suporte de sistemas web corporativos. Sólidos conhecimentos em PHP, JavaScript, Python e Java aplicados na construção, integração e melhoria contínua de plataformas web. Atualmente em pós-graduação em Ciência de Dados e Big Data Analytics, busco oportunidades que valorizem qualidade de código, performance e boas práticas de desenvolvimento.
             <br />
             <br />
-            PHP | Javascript | Python | SQL | Excel | Power BI
+            PHP | JavasScript | Python | MySQL | Laravel | Next.js 
           </p>
           <a href="#parameuzap" className="w-full md:w-auto flex justify-center md:justify-start">
             <button className="flex flex-row items-center justify-center gap-2 mt-2 px-8 py-3 font-bold rounded-full bg-[#e71919] text-white transition duration-300 animate-pulse cursor-pointer hover:bg-[#dd0808] shadow-lg hover:shadow-xl">

@@ -2,7 +2,7 @@ import React from 'react';
 
 const Hero: React.FC = () => {
   return (
-    <div className="h-screen flex flex-col items-center justify-center text-center">
+    <div className="w-full h-full flex flex-col items-center justify-center text-center">
       <div className="flex flex-col items-center">
         <h1 className="text-5xl md:text-7xl font-bold mb-4 text-white tracking-widest">
           VICTOR RICARDO

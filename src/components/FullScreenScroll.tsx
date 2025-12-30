@@ -61,12 +61,26 @@ const FullScreenScroll: React.FC<FullScreenScrollProps> = ({
 
   return (
     <div className="h-screen w-screen overflow-hidden fixed top-0 left-0 z-10">
-      <div
-        className="h-full w-full transition-transform duration-700 ease-in-out"
-        style={{ transform: `translateY(-${currentSection * 100}vh)` }}
-      >
-        {children}
-      </div>
+      {React.Children.map(children, (child, index) => {
+        let transform;
+        if (index === currentSection) {
+          transform = 'translateY(0)';
+        } else if (index < currentSection) {
+          transform = 'translateY(-100%)';
+        } else {
+          transform = 'translateY(100%)';
+        }
+
+        return (
+          <div
+            key={index}
+            className="absolute top-0 left-0 w-full h-full transition-transform duration-700 ease-in-out"
+            style={{ transform }}
+          >
+            {child}
+          </div>
+        );
+      })}
     </div>
   );
 };

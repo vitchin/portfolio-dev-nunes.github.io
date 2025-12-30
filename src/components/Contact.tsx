@@ -2,7 +2,7 @@ import React from 'react';
 
 const Contact: React.FC = () => {
   return (
-    <div className="h-screen flex flex-col items-center justify-center text-center">
+    <div className="w-full h-full flex flex-col items-center justify-center text-center">
       <h2 className="text-4xl font-bold mb-6">Contato</h2>
       <p className="text-lg text-gray-300 mb-8 max-w-2xl px-4">
         Estou disponível para novos projetos e colaborações. Sinta-se à vontade para entrar em contato.

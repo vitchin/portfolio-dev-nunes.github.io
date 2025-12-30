@@ -30,7 +30,7 @@ const projects = [
 
 const Projects: React.FC = () => {
   return (
-    <div className="h-screen flex flex-col items-center justify-center">
+    <div className="w-full h-full flex flex-col items-center justify-center">
       <h2 className="text-4xl font-bold mb-12">Projetos</h2>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8 px-4 max-w-5xl">
         {projects.map((project, index) => (

@@ -1,27 +1,21 @@
 import React from 'react';
 
-const Contact = () => {
+const Contact: React.FC = () => {
   return (
-    <div className="container mx-auto px-4 text-center">
-      <h2 className="text-3xl font-bold mb-4 text-gray-50">Contato</h2>
-      <hr className="w-16 h-1 mx-auto my-6 bg-gray-300 border-0 rounded" />
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-        <div className="text-center flex flex-col items-center">
-          <i className="fas fa-phone text-3xl mb-3 text-gray-50"></i>
-          <p className="text-gray-50">(81) 98379-0276</p>
-        </div>
-        <div className="text-center flex flex-col items-center">
-          <i className="fas fa-envelope text-3xl mb-3 text-gray-50"></i>
-          <a href="mailto:victoroliv2004@gmail.com" className="text-gray-50 hover:underline">
-            victoroliv2004@gmail.com
-          </a>
-        </div>
-        <div className="text-center flex flex-col items-center">
-          <i className="fab fa-linkedin text-3xl mb-3 text-gray-50"></i>
-          <a href="https://www.linkedin.com/in/victornunesdev/" target="_blank" rel="noopener noreferrer" className="text-gray-50 hover:underline">
-            linkedin.com/in/victornunesdev/
-          </a>
-        </div>
+    <div className="w-full h-full flex flex-col items-center justify-center text-center">
+      <h2 className="text-4xl font-bold mb-6">Contato</h2>
+      <p className="text-lg text-gray-300 mb-8 max-w-2xl px-4">
+        Estou disponível para novos projetos e colaborações. Sinta-se à vontade para entrar em contato.
+      </p>
+      <div className="flex flex-col md:flex-row justify-center items-center gap-8">
+        <a href="mailto:victoroliv2004@gmail.com" className="flex items-center gap-3 text-gray-300 hover:text-white transition-colors duration-300">
+          <i className="fas fa-envelope fa-2x"></i>
+          <span className="text-lg">victoroliv2004@gmail.com</span>
+        </a>
+        <a href="https://www.linkedin.com/in/victornunesdev/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 text-gray-300 hover:text-white transition-colors duration-300">
+          <i className="fab fa-linkedin fa-2x"></i>
+          <span className="text-lg">linkedin.com/in/victornunesdev</span>
+        </a>
       </div>
     </div>
   );

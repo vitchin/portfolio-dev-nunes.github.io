@@ -2,6 +2,13 @@
 
 @layer base {
   html {
-    font-family: "Leelawadee UI", "Segoe UI", Roboto, Arial, sans-serif;
+    font-family: "Inter", "Segoe UI", Roboto, Arial, sans-serif;
+  }
+  body {
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+  }
+  body::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, and Opera */
   }
 }

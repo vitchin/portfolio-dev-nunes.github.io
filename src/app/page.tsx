@@ -1,36 +1,40 @@
-import React from 'react';
+"use client";
+
+import React, { useState } from 'react';
 import Navbar from '../components/Navbar';
 import Hero from '../components/Hero';
 import About from '../components/About';
 import Projects from '../components/Projects';
 import Contact from '../components/Contact';
+import FullScreenScroll from '../components/FullScreenScroll';
 
 export default function Home() {
+  const [currentSection, setCurrentSection] = useState(0);
+  const sections = ["home", "about", "projects", "contact"];
+
   return (
-    <div className="flex flex-col min-h-screen">
-      <Navbar />
-
-      <header id="home" className="z-0">
-        <Hero />
-      </header>
-
-      <main className="flex-grow">
-        <section id="about" className="py-20 shadow-2xl">
+    <div className="relative">
+      <Navbar
+        currentSection={sections[currentSection]}
+        onNavigate={setCurrentSection}
+      />
+      <FullScreenScroll
+        currentSection={currentSection}
+        setCurrentSection={setCurrentSection}
+      >
+        <div id="home">
+          <Hero />
+        </div>
+        <div id="about">
           <About />
-        </section>
-
-        <section id="projects" className="py-20 bg-gray-100 shadow-lg">
+        </div>
+        <div id="projects">
           <Projects />
-        </section>
-
-        <section id="contact" className="py-20 bg-[#0b1423]">
+        </div>
+        <div id="contact">
           <Contact />
-        </section>
-      </main>
-
-      <footer className="text-center p-4 bg-[#070c14]">
-        <p className="text-sm text-gray-300">© 2025 DevNunes. Todos os direitos reservados.</p>
-      </footer>
+        </div>
+      </FullScreenScroll>
     </div>
   );
 }

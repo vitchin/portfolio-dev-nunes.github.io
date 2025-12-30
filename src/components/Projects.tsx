@@ -1,127 +1,48 @@
-"use client";
-
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import Image from 'next/image';
 
 const projects = [
   {
-    type: 'Programming',
-    title: 'PyClass',
-    description: 'A brief description of the programming project.',
-    Languages: 'Some languages used in the project.',
-    image: './project-placeholder.svg',
-  },
-  {
-    type: 'Programming',
     title: 'IEBIMembresia',
     description: 'Sistema CRUD de controle de membros/congregados de uma igreja local.',
-    Languages: 'Next.js · Typescript · Firebase · TailwindCSS',
-    image: './Iebimembresia.png',
+    languages: 'Next.js · Typescript · Firebase · TailwindCSS',
+    image: '/Iebimembresia.png',
   },
   {
-    type: 'Programming',
-    title: 'AskServiços',
-    description: 'Another programming project.',
-    Languages: 'Some languages used in the project.',
-    image: './project-placeholder.svg',
-  },
-  {
-    type: 'Programming',
     title: 'FGH QRCode',
-    description: 'Sistema de geração de QRCode feito para equipe de manutenção predial do Hospital Miguel Arraes.',
-    Languages: 'HTML · CSS · JavaScript · TailwindCSS',
-    image: './fghqrcode.png',
+    description: 'Sistema de geração de QRCode para equipe de manutenção predial do Hospital Miguel Arraes.',
+    languages: 'HTML · CSS · JavaScript · TailwindCSS',
+    image: '/fghqrcode.png',
+  },
+  {
+    title: 'PyClass',
+    description: 'Uma plataforma para gerenciamento de aulas e alunos.',
+    languages: 'Python · Flask · SQLite',
+    image: '/project-placeholder.svg',
+  },
+  {
+    title: 'AskServiços',
+    description: 'Aplicação para conectar prestadores de serviço a clientes.',
+    languages: 'PHP · Laravel · MySQL',
+    image: '/project-placeholder.svg',
   },
 ];
 
-const Projects = () => {
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [projectsPerPage, setProjectsPerPage] = useState(3);
-
-  useEffect(() => {
-    const handleResize = () => {
-      if (window.innerWidth >= 1440) {
-        setProjectsPerPage(4);
-      } else if (window.innerWidth >= 1024) {
-        setProjectsPerPage(3);
-      } else if (window.innerWidth >= 768) {
-        setProjectsPerPage(2);
-      } else {
-        setProjectsPerPage(1);
-      }
-    };
-
-    handleResize();
-    window.addEventListener('resize', handleResize);
-
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
-
-    // Cálculos derivados (sem setState em effect)
-    const totalPages = Math.max(
-      1,
-      Math.ceil(projects.length / projectsPerPage)
-    );
-
-    const safeCurrentIndex =
-      currentIndex >= totalPages ? 0 : currentIndex;
-
-    const startIndex = safeCurrentIndex * projectsPerPage;
-    const visibleProjects = projects.slice(
-      startIndex,
-      startIndex + projectsPerPage
-    );
-
-    const goToPrevious = () => {
-      setCurrentIndex(prev =>
-        prev === 0 ? totalPages - 1 : prev - 1
-      );
-    };
-
-    const goToNext = () => {
-      setCurrentIndex(prev =>
-        prev === totalPages - 1 ? 0 : prev + 1
-      );
-    };
-
+const Projects: React.FC = () => {
   return (
-    <div className="container h-fit mx-auto px-4 text-center">
-      <h2 className="text-3xl font-bold mb-4">Projetos</h2>
-      <hr className="w-16 h-1 mx-auto my-6 bg-gray-300 border-0 rounded" />
-      <div className="relative">
-        <div
-          className="grid gap-8"
-          style={{ gridTemplateColumns: `repeat(${projectsPerPage}, 1fr)` }}
-        >
-          {visibleProjects.map((project, index) => (
-            <div key={index} className="bg-white rounded-lg shadow-md overflow-hidden">
-              <Image
-                src={project.image}
-                alt={project.title}
-                width={350}
-                height={250}
-                className="w-full h-48 object-cover flex justify-center items-center"
-              />
-              <div className="p-6">
-                <h5 className="text-xl font-bold mb-2">{project.title}</h5>
-                <p className="text-gray-700">{project.description}</p>
-                <p className="text-sm text-gray-700 pt-2">{project.Languages}</p>
-              </div>
+    <div className="h-screen flex flex-col items-center justify-center">
+      <h2 className="text-4xl font-bold mb-12">Projetos</h2>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 px-4 max-w-5xl">
+        {projects.map((project, index) => (
+          <div key={index} className="bg-[#1a202c] rounded-lg shadow-lg overflow-hidden">
+            <Image src={project.image} alt={project.title} width={400} height={250} className="w-full h-48 object-cover" />
+            <div className="p-6">
+              <h3 className="text-xl font-bold mb-2">{project.title}</h3>
+              <p className="text-gray-400 mb-4">{project.description}</p>
+              <p className="text-sm text-blue-400">{project.languages}</p>
             </div>
-          ))}
-        </div>
-        <button
-          onClick={goToPrevious}
-          className="absolute top-1/2 left-0 w-[40px] h-[40px] transform -translate-y-1/2 bg-gray-800 text-white p-2 rounded-full"
-        >
-          &#10094;
-        </button>
-        <button
-          onClick={goToNext}
-          className="absolute top-1/2 right-0 w-[40px] h-[40px]transform -translate-y-1/2 bg-gray-800 text-white p-2 rounded-full"
-        >
-          &#10095;
-        </button>
+          </div>
+        ))}
       </div>
     </div>
   );
